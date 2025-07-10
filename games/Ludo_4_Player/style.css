@@ -1,0 +1,251 @@
+/* Root variables for easy color changes */
+:root {
+    --red: #f7162d;
+    --green: #00e34c;
+    --yellow: #f7bb05;
+    --blue: #04c3c9;
+    --white: #ffffff;
+    --font: 'Serif', serif;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font);
+    font-weight: bold;
+    background-color: chocolate;
+    color: var(--white);
+    user-select: none;
+  }
+  
+  /* Dice Styles */
+  .r-dice, .g-dice, .b-dice, .y-dice {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.3rem;
+    border: 1px solid black;
+    box-shadow: inset 0 0 8px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 0 0 1px black;
+    cursor: pointer;
+  }
+  
+  .r-dice { background-color: var(--red); }
+  .g-dice { background-color: var(--green); }
+  .b-dice { background-color: var(--blue); }
+  .y-dice { background-color: var(--yellow); }
+  
+  /* Welcome Screen */
+  .welcome {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .setting {
+    width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  .setting input {
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+  
+  .setting input::placeholder {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .ri { background-color: var(--red); box-shadow: 0 0 4px var(--red), inset 0 0 10px var(--red); }
+  .gi { background-color: var(--green); box-shadow: 0 0 4px var(--green), inset 0 0 10px var(--green); }
+  .yi { background-color: var(--yellow); box-shadow: 0 0 4px var(--yellow), inset 0 0 10px var(--yellow); }
+  .bi { background-color: var(--blue); box-shadow: 0 0 4px var(--blue), inset 0 0 10px var(--blue); }
+  
+  /* Play Button */
+  .play {
+    background-color: #c2fbd7;
+    border-radius: 100px;
+    padding: 10px 25px;
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  
+  .play:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(44, 187, 99, 0.35);
+  }
+  
+  /* Dice boards */
+  .diceboard, .mdiceboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+  }
+  
+  .mdiceboard {
+    display: none;
+  }
+  
+  /* Board and Zones */
+  .mainframe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-wrap: wrap;
+  }
+  
+  .ludoboard {
+    width: 600px;
+    height: 600px;
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    border: 1px solid black;
+    background: white;
+  }
+  
+  /* Zones */
+  .red, .green, .blue, .yellow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .red { background: var(--red); grid-column: 1 / 7; grid-row: 1 / 7; }
+  .green { background: var(--green); grid-column: 10 / 16; grid-row: 1 / 7; }
+  .blue { background: var(--blue); grid-column: 1 / 7; grid-row: 10 / 16; }
+  .yellow { background: var(--yellow); grid-column: 10 / 16; grid-row: 10 / 16; }
+  
+  /* Player Pieces */
+  .playerzone {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .player {
+    background: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.9;
+  }
+  
+  .material-icons {
+    font-size: 30px;
+    opacity: 0.9;
+  }
+  
+  .r { color: var(--red); }
+  .g { color: var(--green); }
+  .b { color: var(--blue); }
+  .y { color: var(--yellow); }
+  
+  .rp {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+    background: white;
+  }
+  
+  .rp:hover {
+    border: 1px solid red;
+  }
+  
+  /* Safe & Stop Cells */
+  .step, .astep {
+    border: 1px solid #b3b3b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .redsafe { background: var(--red); }
+  .greensafe { background: var(--green); }
+  .yellowsafe { background: var(--yellow); }
+  .bluesafe { background: var(--blue); }
+  
+  .rstop {
+    background: repeating-linear-gradient(45deg, var(--red), var(--red) 10px, #ffbdc4 10px, #ffbdc4 20px);
+  }
+  .gstop {
+    background: repeating-linear-gradient(45deg, var(--green), var(--green) 10px, #b0ffcc 10px, #b0ffcc 20px);
+  }
+  .ystop {
+    background: repeating-linear-gradient(45deg, var(--yellow), var(--yellow) 10px, #fff2c7 10px, #fff2c7 20px);
+  }
+  .bstop {
+    background: repeating-linear-gradient(45deg, var(--blue), var(--blue) 10px, #bdfdff 10px, #bdfdff 20px);
+  }
+  
+  .centerbox {
+    grid-column: 7 / 10;
+    grid-row: 7 / 10;
+    background: conic-gradient(var(--green) 0deg 90deg, var(--yellow) 90deg 180deg, var(--blue) 180deg 270deg, var(--red) 270deg 360deg);
+  }
+  
+  /* Responsive Mobile Styles */
+  @media screen and (max-width: 768px) {
+    .mainframe {
+      flex-direction: column;
+    }
+  
+    .ludoboard {
+      width: 90vw;
+      height: 90vw;
+    }
+  
+    .diceboard {
+      display: none;
+    }
+  
+    .mdiceboard {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+      margin: 10px 0;
+    }
+  
+    .playerzone {
+      gap: 10px;
+    }
+  
+    .player {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  

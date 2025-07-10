@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel - Game Bites</title>
+  <link rel="icon" type="image/png" href="data:image/png;base64,...(same)" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #0d1117, #1f2937);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background-color: #161b22;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+      animation: fadeIn 0.5s ease-in-out;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #58a6ff;
+      font-size: 24px;
+      margin-bottom: 1.2rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      background-color: #0d1117;
+      border: 1px solid #30363d;
+      color: white;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper .material-icons {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      cursor: pointer;
+      color: #8b949e;
+      transition: color 0.2s;
+    }
+
+    .password-wrapper .material-icons:hover {
+      color: #58a6ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #238636;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2ea043;
+    }
+
+    .error {
+      color: #ff6b6b;
+      font-size: 14px;
+      text-align: center;
+      margin-top: -8px;
+      margin-bottom: 16px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 1.5rem;
+      background: white;
+      color: black;
+      border-collapse: collapse;
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #00c2cb;
+      color: white;
+    }
+
+    .admin-panel {
+      display: none;
+    }
+
+    .admin-panel.active {
+      display: block;
+    }
+
+    .admin-info {
+      text-align: center;
+      color: #00c2cb;
+      font-size: 14px;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+    
+      h1 {
+        font-size: 20px;
+      }
+    
+      input, button {
+        padding: 10px;
+        font-size: 13px;
+      }
+    
+      .password-wrapper .material-icons {
+        top: 10px;
+        right: 10px;
+      }
+    
+      table {
+        font-size: 12px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    
+      th, td {
+        padding: 8px;
+      }
+    
+      .admin-info {
+        font-size: 13px;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- 🔐 Admin Login Form -->
+  <div class="container" id="loginBox">
+    <h1>Admin Login</h1>
+    <input type="email" id="email" placeholder="Admin Email" required />
+    <div class="password-wrapper">
+      <input type="password" id="password" placeholder="Password" required />
+      <span class="material-icons" onclick="togglePassword()">visibility</span>
+    </div>
+    <p class="error" id="loginError"></p>
+    <button onclick="loginAdmin()">Login</button>
+  </div>
+
+  <!-- 👨‍💻 Admin Panel -->
+  <div class="container admin-panel" id="adminPanel">
+    <h1>Admin Panel - Game Bites</h1>
+    <p class="admin-info">Logged in as: <span id="adminEmail"></span></p>
+
+    <!-- Game Table -->
+
+    <!-- User Table -->
+    <h2 style="text-align:center; color:#58a6ff;">👥 User Details</h2>
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Full Name</th>
+          <th>Username</th>
+          <th>Joined At</th>
+        </tr>
+      </thead>
+      
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- 🔧 Firebase + Admin Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDBrC6R_M563xBIMSMTMsfjoXy9rwpk9QU",
+      authDomain: "games-bites.firebaseapp.com",
+      databaseURL: "https://games-bites-default-rtdb.firebaseio.com",
+      projectId: "games-bites",
+      storageBucket: "games-bites.appspot.com",
+      messagingSenderId: "618684661993",
+      appId: "1:618684661993:web:c0032dd7b1d6004329b078"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    // 👁️ Toggle password
+    window.togglePassword = function () {
+      const input = document.getElementById("password");
+      const icon = document.querySelector(".material-icons");
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "visibility_off";
+      } else {
+        input.type = "password";
+        icon.textContent = "visibility";
+      }
+    };
+
+    // 🔐 Admin Login
+    window.loginAdmin = async function () {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorDiv = document.getElementById("loginError");
+    
+      try {
+        const userCred = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCred.user;
+    
+        console.log("✅ Logged in user UID:", user.uid); // ✅ Log the UID
+        console.log("✅ Logged in email:", user.email);
+    
+        const userSnap = await get(ref(db, `users/${user.uid}`));
+    
+        if (!userSnap.exists()) {
+          console.warn("⚠️ No user data found in DB for this UID.");
+          errorDiv.textContent = "Access denied: No user data found.";
+          return;
+        }
+    
+        const userData = userSnap.val();
+        console.log("✅ User data:", userData); // ✅ Log the DB data
+    
+        if (userData.role === "admin") {
+          document.getElementById("loginBox").style.display = "none";
+          document.getElementById("adminPanel").classList.add("active");
+          document.getElementById("adminEmail").textContent = user.email;
+    
+          console.log("✅ Admin verified. Loading data...");
+          loadGames();
+          loadUsers();
+        } else {
+          console.warn("🚫 User is not an admin.");
+          errorDiv.textContent = "Access denied. Not an admin.";
+        }
+      } catch (err) {
+        console.error("🔥 Login error:", err);
+        errorDiv.textContent = "Login failed: " + err.message;
+      }
+    };
+    
+    // 🎮 Load Games
+    function loadGames() {
+      onValue(ref(db, "games"), (snapshot) => {
+        const tbody = document.querySelector("#gameTable tbody");
+        tbody.innerHTML = "";
+        snapshot.forEach(child => {
+          const game = child.val();
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td><img src="${game.image}" width="60" height="40" style="object-fit:cover;border-radius:4px;" /></td>
+            <td>${game.title}</td>
+            <td><a href="${game.link}" target="_blank">Play</a></td>
+          `;
+          tbody.appendChild(row);
+        });
+      });
+    }
+
+    // 👥 Load Users
+    function loadUsers() {
+      const usersRef = ref(db, "users");
+      onValue(usersRef, (snapshot) => {
+        const tbody = document.querySelector("#userTable tbody");
+        tbody.innerHTML = "";
+    
+        if (!snapshot.exists()) {
+          console.log("❌ No user data found!");
+          return;
+        }
+    
+        console.log("✅ Full user snapshot:", snapshot.val());
+    
+        snapshot.forEach(child => {
+          const user = child.val();
+          console.log("🔹 User:", user);
+    
+          const fullName = `${user.firstName || ""} ${user.lastName || ""}`.trim();
+          const joinedAt = user.joinedAt
+            ? new Date(user.joinedAt).toLocaleString()
+            : "Unknown";
+    
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${user.email || "N/A"}</td>
+            <td>${fullName || "N/A"}</td>
+            <td>${user.username || "N/A"}</td>
+            <td>${joinedAt}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      }, (error) => {
+        console.error("❌ Failed to load users:", error);
+      });
+    }
+    
+
+    
+  </script>
+</body>
+</html>

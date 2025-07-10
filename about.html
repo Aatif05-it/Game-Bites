@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Game Bites</title>
+  <link rel="icon" href="assets\images\faviconabout.ico" type="faviconabout.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+      color: #f0f0f0;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: #00ffc8;
+      text-shadow: 0 0 10px #00ffc8;
+      animation: glow 2s infinite alternate;
+      margin-bottom: 20px;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffc8; }
+      to   { text-shadow: 0 0 20px #00ffcc; }
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      color: #dcdcdc;
+    }
+
+    .info-section {
+      margin-top: 40px;
+    }
+
+    .info-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .info-card {
+      background: #1f1f1f;
+      border: 2px solid #00ffc8;
+      border-radius: 12px;
+      padding: 20px;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 0 10px #00ffc8;
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: scale(1.05);
+    }
+
+    .info-card h3 {
+      color: #00ffc8;
+      margin: 15px 0 5px;
+      font-size: 1.3rem;
+    }
+
+    .info-card p {
+      color: #cccccc;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #00ffc8;
+      box-shadow: 0 0 15px #00ffc8;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00ffc8;
+    }
+
+    .icon-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .icon-btn img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      padding: 6px;
+      background: transparent;
+      border: 2px solid #00ffc8;
+      box-shadow: 0 0 8px #00ffc8;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .icon-btn img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 16px #00ffc8;
+    }
+
+    .back-home {
+      margin-top: 50px;
+    }
+
+    .neon-button {
+      display: inline-block;
+      padding: 12px 24px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: #00ffc8;
+      background: transparent;
+      border: 2px solid #00ffc8;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0 8px #00ffc8, inset 0 0 8px #00ffc8;
+      animation: floatBtn 2.5s ease-in-out infinite;
+    }
+
+    .neon-button:hover {
+      background-color: #00ffc8;
+      color: black;
+      box-shadow: 0 0 20px #00ffc8;
+      transform: scale(1.05);
+    }
+
+    @keyframes floatBtn {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .info-card { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>About Game Bites</h1>
+
+  <p>
+    Welcome to <strong>Game Bites</strong> – your daily destination for the best free online games! 🎮<br>
+    We hand-pick addictive and fun games that work on all devices with no downloads. Whether you're into racing, puzzles, action, or classics – we've got something for you!
+  </p>
+
+  <!-- Developer Section -->
+  <div class="info-section">
+    <h2>👨‍💻 Developer Info</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <img src="logo 2.png" alt="Aatif Khan" class="avatar" />
+        <h3>Aatif Khan</h3>
+        <p>Frontend Developer & Firebase Integrator</p>
+        <p><a href="mailto:mohdaatif9820@gmail.com" style="color:#00ffc8;">mohdaatif9820@gmail.com</a></p>
+
+        <div class="icon-buttons">
+          <a href="https://www.linkedin.com/in/aatif-khan-937086374/" target="_blank" class="icon-btn" title="LinkedIn">
+            <img src="link.png" alt="LinkedIn" />
+          </a>
+          <a href="https://github.com/Aatif05-it" target="_blank" class="icon-btn" title="LinkedIn">
+            <img src="github.png" alt="LinkedIn" />
+          </a>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Countries Section -->
+  <div class="info-section">
+    <h2>🌍 Supported Countries</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Top Visitors</h3>
+        <p>India, USA, UK, Canada, Australia</p>
+      </div>
+      <div class="info-card">
+        <h3>Available In</h3>
+        <p>80+ Countries Worldwide</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Home -->
+  <div class="back-home">
+    <a href="index.html" class="neon-button">← Back to Home</a>
+  </div>
+</body>
+</html>

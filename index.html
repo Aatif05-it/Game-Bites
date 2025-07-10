@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Game Bites</title>
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #0f0f0f;
+      color: white;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #1f1f1f, #3a3a3a);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ffc8;
+      font-size: 2rem;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffc8; }
+      to { text-shadow: 0 0 20px #00ffc8; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      background-color: #222;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: #00ffc8;
+      color: black;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .right-section input {
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      border: none;
+      width: 100%;
+      max-width: 300px;
+      background-color: #2a2a2a;
+      color: white;
+      font-size: 1rem;
+    }
+
+    #circleProfileBtn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #00ffc8;
+      background-color: white;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    #circleProfileBtn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-popup {
+      position: absolute;
+      top: 70px;
+      left: 20px;
+      background: #222;
+      border: 1px solid #00ffc8;
+      padding: 1rem;
+      border-radius: 8px;
+      display: none;
+      z-index: 999;
+    }
+
+    .profile-popup a {
+      color: #00ffc8;
+      text-decoration: none;
+      display: block;
+      margin: 5px 0;
+    }
+
+    .profile-popup a:hover {
+      text-decoration: underline;
+    }
+
+    .filters {
+      padding: 1rem;
+      text-align: center;
+      background-color: #141414;
+    }
+
+    .filters button {
+      background: #00ffc8;
+      color: black;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      margin: 0.5rem;
+      font-weight: bold;
+      transition: transform 0.2s ease, background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .filters button:hover,
+    .filters button.active {
+      transform: scale(1.1);
+      background-color: #00ccaa;
+    }
+
+    #game-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .game-card {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 255, 204, 0.1);
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 255, 204, 0.2);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .game-card h3 {
+      margin-top: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    #pagination {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    #pagination button {
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      background-color: #00ffc8;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #pagination button:hover {
+      background-color: #00ccaa;
+      transform: scale(1.1);
+      box-shadow: 0 0 10px #00ffc888;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .left-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .right-section {
+        width: 100%;
+      }
+
+      .right-section input {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+      }
+
+      .nav-brand {
+        font-size: 1.4rem;
+      }
+
+      .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+      }
+
+      .filters button {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        margin: 0.3rem;
+      }
+
+      .game-card h3 {
+        font-size: 0.95rem;
+      }
+
+      .game-card img {
+        height: 100px;
+      }
+
+      #pagination button {
+        padding: 0.4rem 0.9rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="left-section">
+      <div id="circleProfileBtn">
+        <img id="profileImage" src="assets/images/default.png" alt="Profile" />
+      </div>
+      <h1 class="nav-brand">Game Bites</h1>
+      <div class="nav-links" id="nav-links"></div>
+    </div>
+    <div class="right-section">
+      <input type="text" id="search" placeholder="Search games..." />
+    </div>
+  </nav>
+
+  <div class="profile-popup" id="profilePopup"></div>
+
+  <div class="filters">
+    <button data-category="all" class="active" onclick="filterCategory('all')">All</button>
+    <button data-category="puzzle" onclick="filterCategory('puzzle')">🧠 Puzzle</button>
+    <button data-category="action" onclick="filterCategory('action')">⚔️ Action</button>
+    <button data-category="racing" onclick="filterCategory('racing')">🏎️ Racing</button>
+    <button data-category="classic" onclick="filterCategory('classic')">🎲 Classic</button>
+  </div>
+
+  <div id="game-list"></div>
+
+  <div id="pagination">
+    <button id="prevBtn">&laquo; Prev</button>
+    <button id="nextBtn">Next &raquo;</button>
+  </div>
+
+  <!-- ✅ Firebase Auth Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDBrC6R_M563xBIMSMTMsfjoXy9rwpk9QU",
+      authDomain: "games-bites.firebaseapp.com",
+      projectId: "games-bites",
+      storageBucket: "games-bites.appspot.com",
+      messagingSenderId: "618684661993",
+      appId: "1:618684661993:web:c0032dd7b1d6004329b078",
+      databaseURL: "https://games-bites-default-rtdb.firebaseio.com"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const nav = document.getElementById("nav-links");
+    const profileBtn = document.getElementById("circleProfileBtn");
+    const profilePopup = document.getElementById("profilePopup");
+    const profileImage = document.getElementById("profileImage");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        nav.innerHTML = `
+          <a href="index.html">🏠 Home</a>
+          <a href="#" onclick="logout()">🔓 Logout</a>
+          <a href="about.html">ℹ️ About</a>
+        `;
+        profileBtn.onclick = () => {
+          profilePopup.innerHTML = `
+            <p>👋 Welcome, ${user.displayName || user.email.split('@')[0]}!</p>
+            <a href="profile.html">View Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+          `;
+          profilePopup.style.display = profilePopup.style.display === "block" ? "none" : "block";
+        };
+        // 🔁 Optional: load Firebase profile photo if available
+        if (user.photoURL) {
+          profileImage.src = user.photoURL;
+        }
+      } else {
+        nav.innerHTML = `
+          <a href="index.html">🏠 Home</a>
+          <a href="login.html">🔐 Login</a>
+          <a href="about.html">ℹ️ About</a>
+        `;
+        profileBtn.onclick = () => {
+          profilePopup.innerHTML = `
+            <p style="color:#00ffc8;">⚠️ Please login to access your profile.</p>
+            <a href="login.html" style="color:white; text-decoration:underline;">🔐 Go to Login</a>
+          `;
+          profilePopup.style.display = "block";
+          setTimeout(() => {
+            profilePopup.style.display = "none";
+          }, 3000);
+        };
+      }
+    });
+
+    window.logout = async () => {
+      await signOut(auth);
+      location.reload();
+    };
+
+    window.addEventListener("click", (e) => {
+      if (!profileBtn.contains(e.target) && !profilePopup.contains(e.target)) {
+        profilePopup.style.display = "none";
+      }
+    });
+  </script>
+
+  <!-- 🔁 Game logic script -->
+  <script type="module" src="script.js"></script>
+
+
+</body>
+</html>

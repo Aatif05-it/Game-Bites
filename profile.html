@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile - Game Bites</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0d1117;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #58a6ff;
+      animation: slideFadeIn 0.8s ease forwards;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background-color: #161b22;
+      padding: 30px;
+      padding-bottom: 80px;
+      border-radius: 10px;
+      box-shadow: 0 0 0 1px #30363d;
+      animation: slideFadeIn 0.8s ease forwards;
+      position: relative;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      animation: slideFadeIn 0.8s ease forwards;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #c9d1d9;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #fff;
+      transition: border 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #58a6ff;
+      outline: none;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #238636;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      animation: slideFadeIn 0.8s ease forwards;
+    }
+
+    button:hover {
+      background-color: #2ea043;
+      transform: scale(1.03);
+    }
+
+    .logout-btn {
+      background-color: #da3633;
+    }
+
+    .logout-btn:hover {
+      background-color: #f85149;
+    }
+
+    .history, .scores {
+      margin-top: 30px;
+      animation: slideFadeIn 0.8s ease forwards;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 5px 0;
+      border-bottom: 1px solid #30363d;
+      opacity: 0;
+      animation: slideFadeIn 0.5s ease forwards;
+      animation-delay: 0.5s;
+      animation-fill-mode: both;
+    }
+
+    img#profilePic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 10px auto 20px;
+      display: block;
+      border: 2px solid #58a6ff;
+      object-fit: cover;
+    }
+
+    .avatar-option {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border 0.3s ease;
+    }
+
+    .avatar-option.selected {
+      border-color: #58a6ff;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+        padding-bottom: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Your Profile</h1>
+    <img id="profilePic" src="assets/images/default.png" alt="Profile Picture" onerror="this.src='assets/images/default.png'" />
+
+    <div class="form-group">
+      <label>Select an Avatar</label>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+        <img class="avatar-option" src="https://raw.githubusercontent.com/Aatif05-it/games-bites/main/avator.jpg" alt="Avatar" onclick="selectAvatar(this)" />
+        <img class="avatar-option" src="https://raw.githubusercontent.com/Aatif05-it/games-bites/main/avator1.jpg" alt="Avatar" onclick="selectAvatar(this)" />
+        <img class="avatar-option" src="https://raw.githubusercontent.com/Aatif05-it/games-bites/main/avator2.jpg" alt="Avatar" onclick="selectAvatar(this)" />
+        <img class="avatar-option" src="https://raw.githubusercontent.com/Aatif05-it/games-bites/main/avator3.jpg" alt="Avatar" onclick="selectAvatar(this)" />
+        <img class="avatar-option" src="https://raw.githubusercontent.com/Aatif05-it/games-bites/main/avator4.jpg" alt="Avatar" onclick="selectAvatar(this)" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="displayName">Update Name</label>
+      <input type="text" id="displayName" placeholder="Enter new name" onfocus="scrollIntoView(this)" />
+    </div>
+
+    <div class="form-group">
+      <label for="newPassword">Update Password</label>
+      <input type="password" id="newPassword" placeholder="Enter new password" onfocus="scrollIntoView(this)" />
+    </div>
+
+    <button onclick="updateProfile()">Update Profile</button>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+    <div class="history">
+      <h2>Login History</h2>
+      <ul id="historyList"><li>Loading...</li></ul>
+      <button style="margin-top: 10px;" onclick="deleteHistory()">Delete History</button>
+    </div>
+
+    <div class="scores">
+      <h2>Your Game Scores</h2>
+      <ul id="scoreList"><li>Loading...</li></ul>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, updatePassword, updateProfile, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getDatabase, ref, get, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDBrC6R_M563xBIMSMTMsfjoXy9rwpk9QU",
+      authDomain: "games-bites.firebaseapp.com",
+      projectId: "games-bites",
+      storageBucket: "games-bites.appspot.com",
+      messagingSenderId: "618684661993",
+      appId: "1:618684661993:web:c0032dd7b1d6004329b078",
+      measurementId: "G-D25222P01Y",
+      databaseURL: "https://games-bites-default-rtdb.firebaseio.com/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const profilePic = document.getElementById("profilePic");
+    const historyList = document.getElementById("historyList");
+    const scoreList = document.getElementById("scoreList");
+
+    let selectedAvatarURL = "";
+
+    window.selectAvatar = function (img) {
+      document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+      img.classList.add('selected');
+      selectedAvatarURL = img.src;
+      profilePic.src = selectedAvatarURL;
+    };
+
+    window.scrollIntoView = function (element) {
+      setTimeout(() => element.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+    };
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        alert("Not logged in!");
+        window.location.href = "index.html";
+        return;
+      }
+
+      document.getElementById("displayName").value = user.displayName || "";
+      profilePic.src = user.photoURL || "assets/images/default.png";
+
+      const historyRef = ref(db, `loginHistory/${user.uid}`);
+      const snapshot = await get(historyRef);
+      historyList.innerHTML = "";
+      if (snapshot.exists()) {
+        Object.values(snapshot.val()).forEach(entry => {
+          const li = document.createElement("li");
+          li.textContent = new Date(entry.time).toLocaleString();
+          historyList.appendChild(li);
+        });
+      } else {
+        historyList.innerHTML = "<li>No login history found.</li>";
+      }
+
+      const scoreRef = ref(db, `scores/${user.uid}`);
+      onValue(scoreRef, (scoreSnap) => {
+        scoreList.innerHTML = "";
+        const scores = scoreSnap.val();
+        if (scores) {
+          Object.entries(scores).forEach(([game, entries]) => {
+            Object.values(entries).forEach(entry => {
+              const li = document.createElement("li");
+              li.textContent = `${game}: ${entry.score} pts on ${new Date(entry.time).toLocaleString()}`;
+              scoreList.appendChild(li);
+            });
+          });
+        } else {
+          scoreList.innerHTML = "<li>No scores found.</li>";
+        }
+      });
+    });
+
+    window.updateProfile = async function () {
+      const user = auth.currentUser;
+      const newName = document.getElementById("displayName").value.trim();
+      const newPassword = document.getElementById("newPassword").value.trim();
+
+      try {
+        if (newName) await updateProfile(user, { displayName: newName });
+        if (selectedAvatarURL) await updateProfile(user, { photoURL: selectedAvatarURL });
+        if (newPassword) await updatePassword(user, newPassword);
+        showToast("Profile updated!");
+      } catch (error) {
+        showToast("Error: " + error.message);
+      }
+    };
+
+    window.logout = function () {
+      signOut(auth).then(() => window.location.href = "login.html");
+    };
+
+    window.deleteHistory = function () {
+      const user = auth.currentUser;
+      if (!user) return;
+      historyList.innerHTML = "<li>Login history cleared.</li>";
+      remove(ref(db, `loginHistory/${user.uid}`))
+        .then(() => showToast("Login history deleted."))
+        .catch(err => showToast("Error: " + err.message));
+    };
+
+    function showToast(message) {
+      const toast = document.createElement("div");
+      toast.textContent = message;
+      Object.assign(toast.style, {
+        position: "fixed",
+        bottom: "20px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        background: "#21262d",
+        color: "#58a6ff",
+        padding: "12px 20px",
+        borderRadius: "8px",
+        fontWeight: "bold",
+        zIndex: 1000,
+        opacity: 0,
+        transition: "opacity 0.3s ease"
+      });
+      document.body.appendChild(toast);
+      setTimeout(() => (toast.style.opacity = 1), 10);
+      setTimeout(() => {
+        toast.style.opacity = 0;
+        setTimeout(() => toast.remove(), 300);
+      }, 2500);
+    }
+  </script>
+</body>
+</html>

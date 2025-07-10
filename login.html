@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Game Bites</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0d1117;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #ffffff;
+    }
+
+    .login-container {
+      background-color: #161b22;
+      padding: 40px 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 0 1px #30363d;
+    }
+
+    .login-container h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #c9d1d9;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      background-color: #0d1117;
+      border: 1px solid #30363d;
+      color: #ffffff;
+      border-radius: 6px;
+    }
+
+    input::placeholder {
+      color: #8b949e;
+    }
+
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-wrapper input {
+      flex: 1;
+      padding-right: 40px;
+    }
+
+    .password-wrapper .material-icons {
+      position: absolute;
+      right: 12px;
+      color: #8b949e;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .password-wrapper .material-icons:hover {
+      color: #58a6ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #238636;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2ea043;
+    }
+
+    .signup-link {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      color: #8b949e;
+    }
+
+    .signup-link a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: #ff6b6b;
+      font-size: 13px;
+      margin-top: 5px;
+      margin-bottom: -10px;
+    }
+
+    @media (max-width: 500px) {
+      .login-container {
+        padding: 30px 20px;
+        margin: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login to Game Bites</h1>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username or Email</label>
+        <input type="text" id="username" placeholder="Enter your email or username" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" placeholder="Enter your password" required />
+          <span class="material-icons" onclick="togglePassword()">visibility</span>
+        </div>
+        <div id="passwordError" class="error"></div>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="signup-link">
+      New to Game Bites? <a href="signup.html">Create an account</a>
+    </div>
+  </div>
+
+  <!-- ✅ Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDBrC6R_M563xBIMSMTMsfjoXy9rwpk9QU",
+      authDomain: "games-bites.firebaseapp.com",
+      databaseURL: "https://games-bites-default-rtdb.firebaseio.com",
+      projectId: "games-bites",
+      storageBucket: "games-bites.appspot.com",
+      messagingSenderId: "618684661993",
+      appId: "1:618684661993:web:c0032dd7b1d6004329b078",
+      measurementId: "G-D25222P01Y"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const usernameOrEmail = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const passwordError = document.getElementById("passwordError");
+
+      if (password.length < 6) {
+        passwordError.textContent = "Password must be at least 6 characters";
+        return;
+      } else {
+        passwordError.textContent = "";
+      }
+
+      const email = usernameOrEmail.includes("@") ? usernameOrEmail : `${usernameOrEmail}@gamebites.com`;
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // ✅ Save login time to DB
+        await push(ref(db, "loginHistory/" + user.uid), {
+          time: new Date().toISOString(),
+          email: user.email
+        });
+
+        // ✅ Redirect after login
+        window.location.href = "index.html";
+      } catch (error) {
+        passwordError.textContent = "Login failed: " + error.message;
+      }
+    });
+  </script>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById("password");
+      const icon = document.querySelector(".password-wrapper .material-icons");
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "visibility_off";
+      } else {
+        input.type = "password";
+        icon.textContent = "visibility";
+      }
+    }
+  </script>
+</body>
+</html>
