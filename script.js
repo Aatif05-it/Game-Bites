@@ -108,7 +108,7 @@ const defaultGames = [
     title: "Moto X3M Pool Party",
     image: "https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mPoolPartyTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://cdn.htmlgames.com/TrafficRacer2/",
-    class: "Dino",
+    class: "Moto x3m",
     category: "racing",
   },
   {
