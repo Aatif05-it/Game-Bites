@@ -206,7 +206,7 @@ const defaultGames = [
   {
     title: "Racing Monster Trucks",
     image:
-      "https://img.cdn.famobi.com/portal/html5games/images/tmp/PenaltyShootoutMultiLeagueTeaser.jpg?v=0.2-aa02f4cb",
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/RacingMonsterTrucksTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://play.famobi.com/racing-monster-trucks",
     class: "monster truck",
     category: "action",
@@ -242,7 +242,7 @@ const defaultGames = [
     link: "https://html5.gamemonetize.co/d8vjyjtwgj1c7opsa1e99ifmvnfvgvn8/",
     class: "stick-archer",
     category: "action",
-  }
+  },
 ];
 
 localStorage.setItem("games", JSON.stringify(defaultGames));
