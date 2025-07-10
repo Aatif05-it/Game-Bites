@@ -220,29 +220,37 @@ const defaultGames = [
     category: "action",
   },
   {
-    title: "Stick Archer Champion",
+    title: "Snow Rush 3D",
     image:
-      "https://img.gamemonetize.com/sau8efctplff566hb06hzx5jyhgu6xyd/512x384.jpg",
-    link: "https://html5.gamemonetize.co/sau8efctplff566hb06hzx5jyhgu6xyd/",
-    class: "stick-archer",
+      "https://img.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527-512x512.jpg",
+    link: "https://html5.gamedistribution.com/e1e32230bdf040d69f4e367015e1c527/?gd_sdk_referrer_url=https://gamedistribution.com/games/snow-rush-3d/",
+    class: "snow",
     category: "action",
   },
   {
-    title: "Snake Color Challenge",
+    title: "Moto Attacke",
     image:
-      "https://img.gamemonetize.com/djlhj9byrm6ma3wa7j8kjtgjfgx5mycy/512x384.jpg",
-    link: "https://html5.gamemonetize.co/djlhj9byrm6ma3wa7j8kjtgjfgx5mycy/",
-    class: "snake",
+      "https://img.gamedistribution.com/cd5c068325f24c17b787a29db2eb1765-512x512.jpg",
+    link: "https://html5.gamedistribution.com/cd5c068325f24c17b787a29db2eb1765/?gd_sdk_referrer_url=https://gamedistribution.com/games/moto-attack/",
+    class: "moto",
     category: "action",
   },
   {
-    title: "Super Motocross",
+    title: "Mr Cappuccino Assassino",
     image:
-      "https://img.gamemonetize.com/d8vjyjtwgj1c7opsa1e99ifmvnfvgvn8/512x384.jpg",
-    link: "https://html5.gamemonetize.co/d8vjyjtwgj1c7opsa1e99ifmvnfvgvn8/",
-    class: "stick-archer",
+      "https://img.gamedistribution.com/bc1a67b30e674373b2f2af526d63e6e4-512x512.jpg",
+    link: "https://html5.gamedistribution.com/bc1a67b30e674373b2f2af526d63e6e4/?gd_sdk_referrer_url=https://gamedistribution.com/games/mr-cappuccino-assassino/",
+    class: "assassino",
     category: "action",
   },
+  {
+    title: "Agent Hunt: Spy Shooter Game",
+    image:
+      "https://img.gamedistribution.com/918c86d2327d4c298b6208dc62416d32-512x512.jpg",
+    link: "https://html5.gamedistribution.com/918c86d2327d4c298b6208dc62416d32/?gd_sdk_referrer_url=https://gamedistribution.com/games/agent-hunt:-spy-shooter-game/",
+    class: "assassino",
+    category: "action",
+  }
 ];
 
 localStorage.setItem("games", JSON.stringify(defaultGames));
