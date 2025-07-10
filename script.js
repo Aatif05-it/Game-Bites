@@ -1,3 +1,5 @@
+// ✅ Final Version with Improvements
+
 const defaultGames = [
   {
     title: "Flappy Bird",
@@ -104,12 +106,13 @@ const defaultGames = [
     class: "astray",
     category: "puzzle",
   },
+  // ✅ External CDN games below (removed duplicates)
   {
     title: "Moto X3M Pool Party",
     image:
       "https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mPoolPartyTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://cdn.htmlgames.com/TrafficRacer2/",
-    class: "Moto x3m",
+    class: "moto-x3m",
     category: "racing",
   },
   {
@@ -117,7 +120,7 @@ const defaultGames = [
     image:
       "https://img.cdn.famobi.com/portal/html5games/images/tmp/ArcheryWorldTourTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://play.famobi.com/archery-world-tour",
-    class: "archery-world-tour",
+    class: "archery",
     category: "action",
   },
   {
@@ -125,7 +128,7 @@ const defaultGames = [
     image:
       "https://img.cdn.famobi.com/portal/html5games/images/tmp/WesternSniperTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://play.famobi.com/western-sniper",
-    class: "western-sniper",
+    class: "sniper",
     category: "action",
   },
   {
@@ -141,7 +144,7 @@ const defaultGames = [
     image:
       "https://img.cdn.famobi.com/portal/html5games/images/tmp/ParkingRushTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://play.famobi.com/parking-panic",
-    class: "rush",
+    class: "parking",
     category: "action",
   },
   {
@@ -149,37 +152,101 @@ const defaultGames = [
     image:
       "https://img.cdn.famobi.com/portal/html5games/images/tmp/WordsOfWondersTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://play.famobi.com/words-of-wonders",
-    class: "words-of-wonders",
+    class: "words",
     category: "puzzle",
   },
   {
-    title: "Go Escape",
+    title: "Drift Dudes",
     image:
-      "https://img.cdn.famobi.com/portal/html5games/images/tmp/GoEscapeTeaser.jpg?v=0.2-aa02f4cb",
-    link: "https://play.famobi.com/go-escape",
-    class: "escape",
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/DriftDudesTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/drift-dudes",
+    class: "drift",
     category: "action",
   },
   {
-    title: "Go Escape",
+    title: "Stack Smash",
     image:
-      "https://img.cdn.famobi.com/portal/html5games/images/tmp/GoEscapeTeaser.jpg?v=0.2-aa02f4cb",
-    link: "https://play.famobi.com/go-escape",
-    class: "escape",
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/StackSmashTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/stack-smash",
+    class: "smash",
     category: "action",
   },
   {
-    title: "Go Escape",
+    title: "High Hills",
     image:
-      "https://img.cdn.famobi.com/portal/html5games/images/tmp/GoEscapeTeaser.jpg?v=0.2-aa02f4cb",
-    link: "https://play.famobi.com/go-escape",
-    class: "escape",
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/HighHillsTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/high-hills",
+    class: "high-hills",
     category: "action",
   },
+  {
+    title: "3D Basketball",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/3dBasketballTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/3d-basketball",
+    class: "basketball",
+    category: "action",
+  },
+  {
+    title: "Highway Rider Extreme",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/HighwayRiderExtremeTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/highway-rider-extreme",
+    class: "words",
+    category: "racing",
+  },
+  {
+    title: "Penalty Shootout: Multi League",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/PenaltyShootoutMultiLeagueTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/penalty-shootout-multi-league",
+    class: "penalty",
+    category: "action",
+  },
+  {
+    title: "Racing Monster Trucks",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/PenaltyShootoutMultiLeagueTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/racing-monster-trucks",
+    class: "monster truck",
+    category: "action",
+  },
+  {
+    title: "Classic Bowling",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/ClassicBowlingTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/classic-bowling",
+    class: "classc",
+    category: "action",
+  },
+  {
+    title: "Stick Archer Champion",
+    image:
+      "https://img.gamemonetize.com/sau8efctplff566hb06hzx5jyhgu6xyd/512x384.jpg",
+    link: "https://html5.gamemonetize.co/sau8efctplff566hb06hzx5jyhgu6xyd/",
+    class: "stick-archer",
+    category: "action",
+  },
+  {
+    title: "Snake Color Challenge",
+    image:
+      "https://img.gamemonetize.com/djlhj9byrm6ma3wa7j8kjtgjfgx5mycy/512x384.jpg",
+    link: "https://html5.gamemonetize.co/djlhj9byrm6ma3wa7j8kjtgjfgx5mycy/",
+    class: "snake",
+    category: "action",
+  },
+  {
+    title: "Super Motocross",
+    image:
+      "https://img.gamemonetize.com/d8vjyjtwgj1c7opsa1e99ifmvnfvgvn8/512x384.jpg",
+    link: "https://html5.gamemonetize.co/d8vjyjtwgj1c7opsa1e99ifmvnfvgvn8/",
+    class: "stick-archer",
+    category: "action",
+  }
 ];
+
 localStorage.setItem("games", JSON.stringify(defaultGames));
 
-// Safe parse: fallback to default if data corrupted
 let games;
 try {
   games = JSON.parse(localStorage.getItem("games")) || defaultGames;
@@ -196,7 +263,6 @@ let currentPage = parseInt(localStorage.getItem("currentPage")) || 1;
 let currentFilter = "";
 let currentCategory = "all";
 
-// Render the list of games based on search and filter
 function renderGames(filter = "", category = "all") {
   currentFilter = filter;
   currentCategory = category;
@@ -225,6 +291,7 @@ function renderGames(filter = "", category = "all") {
     const image = document.createElement("img");
     image.src = game.image;
     image.alt = game.title;
+    image.loading = "lazy";
     image.onerror = () => {
       image.src = "assets/images/default.png";
     };
@@ -248,7 +315,6 @@ function renderGames(filter = "", category = "all") {
   renderPagination(totalPages);
 }
 
-// Create pagination buttons
 function renderPagination(totalPages) {
   let pagination = document.getElementById("pagination");
 
@@ -262,9 +328,7 @@ function renderPagination(totalPages) {
   pagination.innerHTML = `
     <button id="prevBtn" ${currentPage === 1 ? "disabled" : ""}>Prev</button>
     <span>Page ${currentPage} of ${totalPages}</span>
-    <button id="nextBtn" ${
-      currentPage === totalPages ? "disabled" : ""
-    }>Next</button>
+    <button id="nextBtn" ${currentPage === totalPages ? "disabled" : ""}>Next</button>
   `;
 
   document.getElementById("prevBtn").addEventListener("click", () => {
@@ -282,13 +346,11 @@ function renderPagination(totalPages) {
   });
 }
 
-// Search input handler
 searchBox.addEventListener("input", (e) => {
   currentPage = 1;
   renderGames(e.target.value, currentCategory);
 });
 
-// Filter button click handler
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     filterButtons.forEach((btn) => btn.classList.remove("active"));
@@ -300,5 +362,4 @@ filterButtons.forEach((button) => {
   });
 });
 
-// Initial load
 renderGames();
