@@ -106,17 +106,75 @@ const defaultGames = [
   },
   {
     title: "Moto X3M Pool Party",
-    image: "https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mPoolPartyTeaser.jpg?v=0.2-aa02f4cb",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mPoolPartyTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://cdn.htmlgames.com/TrafficRacer2/",
     class: "Moto x3m",
     category: "racing",
   },
   {
-    title: "Dino",
-    image: "games/t-rex-runner-gh-pages/logo.png",
-    link: "games/t-rex-runner-gh-pages/index.html",
-    class: "Dino",
-    category: "racing",
+    title: "Archery World Tour",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/ArcheryWorldTourTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/archery-world-tour",
+    class: "archery-world-tour",
+    category: "action",
+  },
+  {
+    title: "Western Sniper",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/WesternSniperTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/western-sniper",
+    class: "western-sniper",
+    category: "action",
+  },
+  {
+    title: "Go Escape",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/GoEscapeTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/go-escape",
+    class: "escape",
+    category: "action",
+  },
+  {
+    title: "Parking Rush",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/ParkingRushTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/parking-panic",
+    class: "rush",
+    category: "action",
+  },
+  {
+    title: "Words of Wonders",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/WordsOfWondersTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/words-of-wonders",
+    class: "words-of-wonders",
+    category: "puzzle",
+  },
+  {
+    title: "Go Escape",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/GoEscapeTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/go-escape",
+    class: "escape",
+    category: "action",
+  },
+  {
+    title: "Go Escape",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/GoEscapeTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/go-escape",
+    class: "escape",
+    category: "action",
+  },
+  {
+    title: "Go Escape",
+    image:
+      "https://img.cdn.famobi.com/portal/html5games/images/tmp/GoEscapeTeaser.jpg?v=0.2-aa02f4cb",
+    link: "https://play.famobi.com/go-escape",
+    class: "escape",
+    category: "action",
   },
 ];
 localStorage.setItem("games", JSON.stringify(defaultGames));
