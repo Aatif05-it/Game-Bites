@@ -106,7 +106,7 @@ const defaultGames = [
   },
   {
     title: "Dino",
-    image: "games/t-rex-runner-gh-pages/logo.png",
+    image: "https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mPoolPartyTeaser.jpg?v=0.2-aa02f4cb",
     link: "https://cdn.htmlgames.com/TrafficRacer2/",
     class: "Dino",
     category: "racing",
